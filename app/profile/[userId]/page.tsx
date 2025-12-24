@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import ProfileHeader from "./components/profileHeader";
 import ProfileOrganization from "./components/profileOrganization";
 import { useRandomColor } from "@/app/hooks/useRandomColor";
+import OrganizationCard from "./components/OrganizationCard";
 
 type Department = {
   id: string;
@@ -12,6 +13,28 @@ type Department = {
   tag: string;
   description: string;
   roleDescription: string;
+};
+
+type Leadership = {
+  name: string;
+  designation: string;
+  email?: string;
+  phone?: string;
+};
+
+type OfficeLocation = {
+  city: string;
+  state: string;
+  address: string;
+};
+
+type Locations = {
+  office: OfficeLocation;
+};
+
+type Contacts = {
+  phone?: string;
+  email?: string;
 };
 
 type Organization = {
@@ -22,6 +45,9 @@ type Organization = {
   isCurrent: boolean;
   roles: string[];
   about?: string;
+  leadership?: Leadership[];
+  locations?: Locations;
+  contacts?: Contacts;
   departments?: Department[];
 };
 
@@ -38,6 +64,7 @@ type User = {
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
+export const dynamic = "force-dynamic";
 export default function Page() {
   const params = useParams();
   const userId = params?.userId;
@@ -45,7 +72,7 @@ export default function Page() {
   const color = useRandomColor();
 
   const { data, error, isLoading } = useSWR(
-    "https://codebanao.in/user/index.json",
+    "https://codebanao.in/user/index.json", // hosted sample json file with dummy user data and used my domain in hostinger
     fetcher
   );
 
@@ -75,6 +102,9 @@ export default function Page() {
         privileges={currentOrg?.roles || []}
         sector={currentOrg?.sector || "N/A"}
         about={currentOrg?.about || "N/A"}
+        leadership={currentOrg?.leadership || []}
+        locations={currentOrg?.locations}
+        contacts={currentOrg?.contacts}
         color={color}
       />
     </div>
