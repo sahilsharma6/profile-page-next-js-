@@ -1,7 +1,7 @@
 type InfoCardProps = {
   title?: string;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export default function InfoCard({
@@ -11,7 +11,7 @@ export default function InfoCard({
 }: InfoCardProps) {
   return (
     <div
-      className={`bg-base-100 shadow  border border-gray-200 rounded-lg p-6 ${
+      className={`bg-base-100 shadow  border border-gray-200 rounded-lg p-4 ${
         className || ""
       }`}
     >

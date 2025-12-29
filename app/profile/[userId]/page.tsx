@@ -6,6 +6,8 @@ import ProfileHeader from "./components/profileHeader";
 import ProfileOrganization from "./components/profileOrganization";
 import { useRandomColor } from "@/app/hooks/useRandomColor";
 import OrganizationCard from "./components/OrganizationCard";
+import Departments from "./components/Departments";
+import AllOrganizations from "./components/AllOrganizations";
 
 type Department = {
   id: string;
@@ -107,6 +109,12 @@ export default function Page() {
         contacts={currentOrg?.contacts}
         color={color}
       />
+
+      <Departments
+        departmentsData={currentOrg?.departments || []}
+        color={color}
+      />
+      <AllOrganizations organizations={user.organizations} />
     </div>
   );
 }

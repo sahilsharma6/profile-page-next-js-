@@ -1,5 +1,5 @@
 type BadgeProps = {
-  label: string;
+  label?: string;
   variant?: "primary" | "success" | "warning" | "admin" | "manager" | "member";
   icon?: React.ReactNode;
 };
@@ -20,7 +20,7 @@ export default function Badge({
 
   return (
     <span
-      className={`inline-flex gap-1 mx- items-center px-3 py-1 rounded text-xs font-medium bg-gray-200 text-gray-700  ${styles[variant]}`}
+      className={`inline-flex gap-1  items-center px-3 py-1 rounded text-xs font-medium bg-gray-200 text-gray-700  ${styles[variant]}`}
     >
       {icon}
       {label}
